@@ -11,12 +11,12 @@
  * Hardware: ESP32 Expansion Board, DHT22, PIR, 5V Relay, 16x2 I2C LCD
  */
 // ============ WIFI CREDENTIALS ============
-char ssid[] = "4Cam";
-char pass[] = "a123456??";
+char ssid[] = "YOUR-WIFI-SSID";
+char pass[] = "YOUR-WIFI-PASSWORD";
 
-#define BLYNK_TEMPLATE_ID "TMPL6bEh1Nf2E"
-#define BLYNK_TEMPLATE_NAME "Smart Hydroponic"
-#define BLYNK_AUTH_TOKEN      "VlJbimOaBnpHHfDeHDTkdk2JQmkdv4KV"       // Get from Blynk Cloud
+#define BLYNK_TEMPLATE_ID "template_id"
+#define BLYNK_TEMPLATE_NAME "template_name"
+#define BLYNK_AUTH_TOKEN      "blynk-auth-token"       // Get from Blynk Cloud
 
 #include <WiFi.h>
 #include <BlynkSimpleEsp32.h>
@@ -69,6 +69,11 @@ BLYNK_WRITE(V_PUMP_SWITCH) {
   Serial.println(pumpState ? "Pump: ON" : "Pump: OFF");
 }
 
+// Re-apply relay state when Blynk reconnects (helps after brief WiFi drops)
+BLYNK_CONNECTED() {
+  Blynk.virtualWrite(V_PUMP_SWITCH, pumpState);
+}
+
 // ============ SETUP ============
 void setup() {
   Serial.begin(115200);
@@ -109,6 +114,7 @@ void setup() {
   lcd.print("Ready!       ");
   
   Serial.println("=== Smart Plant Monitor Started ===");
+  Serial.println("(If you see this repeatedly, ESP32 is resetting - likely power brownout when pump turns on)");
 }
 
 // ============ MAIN LOOP ============

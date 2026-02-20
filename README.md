@@ -31,8 +31,7 @@ A wireless plant monitoring and protection system that monitors temperature and 
 | **16×2 LCD** | 1 | I2C interface (e.g., PCF8574 backpack) |
 | **18650 Battery** | 2 | Power source (with holder) |
 | **Battery Holder** | 1 | 2S configuration for 7.4V |
-| **Jumper Wires** | — | Male-to-male, male-to-female |
-| **Breadboard** | 1 | Optional, for prototyping |
+
 
 ### Power Notes
 
@@ -63,7 +62,6 @@ A wireless plant monitoring and protection system that monitors temperature and 
 - VCC → 3.3V (or 5V if module supports)
 - GND → GND
 - DATA → GPIO 15
-- (Add 4.7kΩ–10kΩ pull-up between DATA and VCC if not on module)
 
 **PIR Motion Sensor:**
 - VCC → 5V (or 3.3V)
