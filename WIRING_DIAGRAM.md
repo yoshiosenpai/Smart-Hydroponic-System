@@ -22,7 +22,7 @@
                               │                                       │
                               │                                       │
 ┌─────────────────────────────┴───────────────────────────────────────┴─────────────────────────┐
-│                                    ESP32 DEV KIT                                                   │
+│                              ESP32 EXPANSION BOARD                                                │
 │  ┌─────────────────────────────────────────────────────────────────────────────────────────┐   │
 │  │                                                                                          │   │
 │  │   3V3 ────────┬────────────────────────────────────────────────────────────────────┐    │   │
@@ -33,7 +33,7 @@
 │  │               │                                                                    │    │   │
 │  │   GPIO 2 ─────┼──────────────────────────────► RELAY IN (Pump control)             │    │   │
 │  │   GPIO 4 ◄────┼────────────────────────────── PIR OUT (Motion detect)              │    │   │
-│  │   GPIO 15 ◄───┼────────────────────────────── DHT11 DATA                           │    │   │
+│  │   GPIO 15 ◄───┼────────────────────────────── DHT22 DATA                           │    │   │
 │  │   GPIO 21 ────┼────────────────────────────── LCD SDA (I2C)                        │    │   │
 │  │   GPIO 22 ────┼────────────────────────────── LCD SCL (I2C)                        │    │   │
 │  │                                                                                     │    │   │
@@ -45,10 +45,10 @@
 
 ## Component-by-Component Wiring
 
-### 1. DHT11 Sensor
+### 1. DHT22 Sensor
 
 ```
-     DHT11 Module
+     DHT22 Module
     ┌─────────────┐
     │   [Sensor]  │
     │   ┌───┐     │
@@ -66,18 +66,18 @@
   GPIO15      3.3V
   (ESP32)     (ESP32)
     │           │
-    │           └──► DHT11 Pin 1 (VCC)
+    │           └──► DHT22 Pin 1 (VCC)
     │
-    └──► DHT11 Pin 2 (DATA)
+    └──► DHT22 Pin 2 (DATA)
 
-  DHT11 Pin 3 (GND) ──► GND (ESP32)
+  DHT22 Pin 3 (GND) ──► GND (ESP32)
 
   Optional: 4.7kΩ–10kΩ resistor between DATA and VCC
 ```
 
-**Connection table — DHT11:**
+**Connection table — DHT22:**
 
-| DHT11 Pin | Wire Color (Typical) | Connect To |
+| DHT22 Pin | Wire Color (Typical) | Connect To |
 |-----------|----------------------|------------|
 | 1 (VCC)   | Red                  | ESP32 3.3V |
 | 2 (DATA)  | Yellow/White         | ESP32 GPIO 15 |
@@ -210,12 +210,12 @@
 
 | From | To |
 |------|-----|
-| **ESP32 3.3V** | DHT11 VCC |
-| **ESP32 GND** | DHT11 GND, PIR GND, Relay GND, LCD GND, Battery (−) |
+| **ESP32 3.3V** | DHT22 VCC |
+| **ESP32 GND** | DHT22 GND, PIR GND, Relay GND, LCD GND, Battery (−) |
 | **ESP32 5V** | PIR VCC, Relay VCC, LCD VCC (or use external 5V) |
 | **ESP32 GPIO 2** | Relay IN |
 | **ESP32 GPIO 4** | PIR OUT |
-| **ESP32 GPIO 15** | DHT11 DATA |
+| **ESP32 GPIO 15** | DHT22 DATA |
 | **ESP32 GPIO 21** | LCD SDA |
 | **ESP32 GPIO 22** | LCD SCL |
 | **Battery (+)** | Relay COM |
@@ -230,7 +230,7 @@
     +5V Rail  ═══════════════════════════════════
     GND Rail  ═══════════════════════════════════
 
-    [ESP32]     [DHT11]    [PIR]     [Relay]    [LCD]
+    [ESP32]     [DHT22]    [PIR]     [Relay]    [LCD]
     
     Place ESP32 on one side, sensors on the other.
     Use jumper wires to connect per tables above.
@@ -243,10 +243,10 @@
 ## Pin Reference Card (ESP32)
 
 ```
-    ESP32 Dev Kit Pinout (relevant pins)
+    ESP32 Expansion Board Pinout (relevant pins)
     
         3V3  │  │  GND
-        15   │  │  GND      ← DHT11 DATA
+        15   │  │  GND      ← DHT22 DATA
          2   │  │  GPIO 4   ← Relay IN, PIR OUT
         21   │  │  GPIO 22  ← LCD SDA, LCD SCL
         5V   │  │  GND

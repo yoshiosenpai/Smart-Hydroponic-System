@@ -1,15 +1,15 @@
 /*
- * DHT11 Temperature & Humidity Test - ESP32
+ * DHT22 Temperature & Humidity Test - ESP32
  *
- * Tests the DHT11 sensor only. No other hardware needed.
- * Wiring: DHT11 VCC→3.3V, GND→GND, DATA→GPIO15
+ * Tests the DHT22 sensor only. No other hardware needed.
+ * Wiring: DHT22 VCC→3.3V, GND→GND, DATA→GPIO15
  *         (Optional: 4.7kΩ–10kΩ pull-up between DATA and VCC)
  */
 
 #include <DHT.h>
 
 #define DHT_PIN   15   // Same as main project (GPIO15)
-#define DHT_TYPE  DHT11
+#define DHT_TYPE  DHT22
 
 DHT dht(DHT_PIN, DHT_TYPE);
 
@@ -18,7 +18,7 @@ void setup() {
   delay(500);
 
   dht.begin();
-  Serial.println("DHT11 Test - Reading temperature and humidity...");
+  Serial.println("DHT22 Test - Reading temperature and humidity...");
   Serial.println("----------------------------------------");
 }
 

@@ -10,7 +10,7 @@ A wireless plant monitoring and protection system that monitors temperature and 
 
 | Feature | Description |
 |---------|-------------|
-| **Temperature & Humidity** | DHT11 sensor monitors environmental conditions continuously |
+| **Temperature & Humidity** | DHT22 sensor monitors environmental conditions continuously |
 | **Animal Detection** | PIR motion sensor detects animal activity to protect plants |
 | **Instant Alerts** | Push notifications sent to Blynk app when motion is detected; red indicator shown |
 | **Water Pump Control** | Turn pump on/off remotely via Blynk app for nutrient supply |
@@ -23,8 +23,8 @@ A wireless plant monitoring and protection system that monitors temperature and 
 
 | Component | Quantity | Specification |
 |-----------|----------|---------------|
-| **ESP32** | 1 | Main microcontroller with built-in WiFi |
-| **DHT11** | 1 | Temperature & humidity sensor |
+| **ESP32 Expansion Board** | 1 | Main microcontroller with built-in WiFi |
+| **DHT22** | 1 | Temperature & humidity sensor |
 | **PIR Motion Sensor** | 1 | HC-SR501 or similar (3–7m range) |
 | **5V Relay Module** | 1 | Single-channel relay for pump control |
 | **DC Water Pump** | 1 | 5–12V submersible or inline pump |
@@ -36,8 +36,8 @@ A wireless plant monitoring and protection system that monitors temperature and 
 
 ### Power Notes
 
-- ESP32: 3.3V logic, 5V input via USB or Vin
-- DHT11, PIR, Relay: 5V or 3.3V (check module specs)
+- ESP32 Expansion Board: 3.3V logic, 5V input via USB or Vin
+- DHT22, PIR, Relay: 5V or 3.3V (check module specs)
 - Water pump: Use relay; power pump from battery/separate supply, not directly from ESP32
 - If using 18650 batteries (2S ≈ 7.4V), use a 5V/3.3V step-down regulator for ESP32 and sensors
 
@@ -51,7 +51,7 @@ A wireless plant monitoring and protection system that monitors temperature and 
 
 | Component | ESP32 GPIO | Pin Function |
 |-----------|------------|--------------|
-| DHT11 Data | GPIO 15 | Data (single-wire) |
+| DHT22 Data | GPIO 15 | Data (single-wire) |
 | PIR Output | GPIO 4 | Digital input |
 | Relay Control | GPIO 2 | Digital output |
 | LCD SDA | GPIO 21 | I2C Data |
@@ -59,7 +59,7 @@ A wireless plant monitoring and protection system that monitors temperature and 
 
 ### Connection Details
 
-**DHT11:**
+**DHT22:**
 - VCC → 3.3V (or 5V if module supports)
 - GND → GND
 - DATA → GPIO 15
@@ -105,7 +105,7 @@ A wireless plant monitoring and protection system that monitors temperature and 
    ```
 3. Tools → Board → Boards Manager
 4. Search **“esp32”** and install **ESP32 by Espressif Systems**
-5. Tools → Board → Select your board (e.g. **ESP32 Dev Module**)
+5. Tools → Board → Select your board (e.g. **ESP32 Dev Module** or your specific expansion board)
 
 ### 3. Required Libraries
 
@@ -264,7 +264,7 @@ Use the Serial Monitor at 115200 baud to see:
                     ┌─────────────────────────────────────┐
                     │              ESP32                  │
                     │                                     │
-  DHT11 ───────────►│ GPIO15  Temperature & Humidity      │
+  DHT22 ────────────►│ GPIO15  Temperature & Humidity      │
                     │                                     │
   PIR ─────────────►│ GPIO4   Motion Detection            │──────► Blynk Cloud
                     │                                     │             │

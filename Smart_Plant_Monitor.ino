@@ -2,13 +2,13 @@
  * Smart Plant Monitoring & Protection System
  * 
  * Features:
- * - DHT11: Temperature & Humidity monitoring
+ * - DHT22: Temperature & Humidity monitoring
  * - PIR Motion Sensor: Animal activity detection with Blynk alerts
  * - Water Pump: On/Off control via Blynk app (5V relay)
  * - 16x2 LCD: Local data display
- * - ESP8266: WiFi connectivity for Blynk cloud
+ * - ESP32: WiFi connectivity for Blynk cloud
  * 
- * Hardware: ESP32, DHT11, PIR, 5V Relay, 16x2 I2C LCD
+ * Hardware: ESP32 Expansion Board, DHT22, PIR, 5V Relay, 16x2 I2C LCD
  */
 // ============ WIFI CREDENTIALS ============
 char ssid[] = "4Cam";
@@ -27,10 +27,10 @@ char pass[] = "a123456??";
 
 
 // ============ PIN DEFINITIONS (ESP32) ============
-#define DHT_PIN      15      // DHT11 data (GPIO15)
+#define DHT_PIN      15      // DHT22 data (GPIO15)
 #define PIR_PIN      4       // PIR motion sensor output (GPIO4)
 #define RELAY_PIN    2       // Relay control for water pump (GPIO2)
-#define DHT_TYPE     DHT11
+#define DHT_TYPE     DHT22
 
 // I2C LCD: SDA=GPIO21, SCL=GPIO22 (default ESP32 I2C pins)
 #define LCD_ADDR     0x27    // Common I2C address for 16x2 LCD (try 0x3F if not working)
@@ -79,7 +79,7 @@ void setup() {
   pinMode(RELAY_PIN, OUTPUT);
   digitalWrite(RELAY_PIN, HIGH);  // Pump OFF by default (ACTIVE LOW relay: HIGH = OFF)
   
-  // Initialize DHT11
+  // Initialize DHT22
   dht.begin();
   
   // Initialize LCD
@@ -118,7 +118,7 @@ void loop() {
   
   unsigned long now = millis();
   
-  // Read DHT11 periodically
+  // Read DHT22 periodically
   if (now - lastDHTRead >= DHT_INTERVAL) {
     readDHT();
     lastDHTRead = now;
