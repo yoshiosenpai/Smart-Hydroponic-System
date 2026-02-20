@@ -10,7 +10,7 @@ A wireless plant monitoring and protection system that monitors temperature and 
 
 | Feature | Description |
 |---------|-------------|
-| **Temperature & Humidity** | DHT11 sensor monitors environmental conditions continuously |
+| **Temperature & Humidity** | DHT22 sensor monitors environmental conditions continuously |
 | **Animal Detection** | PIR motion sensor detects animal activity to protect plants |
 | **Instant Alerts** | Push notifications sent to Blynk app when motion is detected; red indicator shown |
 | **Water Pump Control** | Turn pump on/off remotely via Blynk app for nutrient supply |
@@ -24,15 +24,14 @@ A wireless plant monitoring and protection system that monitors temperature and 
 | Component | Quantity | Specification |
 |-----------|----------|---------------|
 | **ESP32** | 1 | Main microcontroller with built-in WiFi |
-| **DHT11** | 1 | Temperature & humidity sensor |
+| **DHT22** | 1 | Temperature & humidity sensor |
 | **PIR Motion Sensor** | 1 | HC-SR501 or similar (3–7m range) |
 | **5V Relay Module** | 1 | Single-channel relay for pump control |
 | **DC Water Pump** | 1 | 5–12V submersible or inline pump |
 | **16×2 LCD** | 1 | I2C interface (e.g., PCF8574 backpack) |
 | **18650 Battery** | 2 | Power source (with holder) |
 | **Battery Holder** | 1 | 2S configuration for 7.4V |
-| **Jumper Wires** | — | Male-to-male, male-to-female |
-| **Breadboard** | 1 | Optional, for prototyping |
+
 
 ### Power Notes
 
@@ -51,7 +50,7 @@ A wireless plant monitoring and protection system that monitors temperature and 
 
 | Component | ESP32 GPIO | Pin Function |
 |-----------|------------|--------------|
-| DHT11 Data | GPIO 15 | Data (single-wire) |
+| DHT22 Data | GPIO 15 | Data (single-wire) |
 | PIR Output | GPIO 4 | Digital input |
 | Relay Control | GPIO 2 | Digital output |
 | LCD SDA | GPIO 21 | I2C Data |
@@ -59,11 +58,10 @@ A wireless plant monitoring and protection system that monitors temperature and 
 
 ### Connection Details
 
-**DHT11:**
+**DHT22:**
 - VCC → 3.3V (or 5V if module supports)
 - GND → GND
 - DATA → GPIO 15
-- (Add 4.7kΩ–10kΩ pull-up between DATA and VCC if not on module)
 
 **PIR Motion Sensor:**
 - VCC → 5V (or 3.3V)
